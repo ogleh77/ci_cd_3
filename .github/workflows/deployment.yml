@@ -1,0 +1,23 @@
+name: deployment.yml
+
+on:
+    workflow_run:
+      workflows: [ "Java CI with Maven" ]
+      types:
+        - completed
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Pull image from Docker
+        run: echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker pull ogleh/ci_cd_3:latest
+
+      - name: Stop Docker container
+        run: echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker stop  ci-cd-3-container || true
+
+      - name: Delete Docker container
+        run: echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker rm  ci-cd-3-container || true
+
+      - name: Run the new Docker container
+        run: echo "${{ secrets.SUDO_PASSWORD }}" | sudo -S docker run -d --name ci-cd-3-container -p 80:8080 ogleh/ci-cd-3-containery:latest
