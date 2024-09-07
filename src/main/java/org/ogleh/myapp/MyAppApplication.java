@@ -19,7 +19,7 @@ public class MyAppApplication {
     public String greetWithName(@PathVariable("name") String name) {
         return "Asc " + name;
     }
-    @GetMapping("/{num1}/num2")
+    @GetMapping("/{num1}/{num2}")
     public String greetWithName(@PathVariable("num1") int num1, @PathVariable("num2") int num2) {
         return "The sum is "+(num1 + num2);
     }
