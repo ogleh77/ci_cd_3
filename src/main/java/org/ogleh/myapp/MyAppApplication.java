@@ -20,8 +20,12 @@ public class MyAppApplication {
         return "Asc " + name;
     }
     @GetMapping("/{num1}/{num2}")
-    public String greetWithName(@PathVariable("num1") int num1, @PathVariable("num2") int num2) {
+    public String addition(@PathVariable("num1") int num1, @PathVariable("num2") int num2) {
         return "The sum is "+(num1 + num2);
+    }
+    @GetMapping("/dev/{num1}/{num2}")
+    public String division(@PathVariable("num1") int num1, @PathVariable("num2") int num2) {
+        return "The result is "+(num1 + num2);
     }
 
     public static void main(String[] args) {
